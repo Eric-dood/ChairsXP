@@ -3,7 +3,7 @@
 #include <iomanip>
 
 using namespace std;
-const int SIZE = 3;
+const int SIZE = 3, MIN = 99999, MAX = 100000;
 
 class Chair
 {
@@ -18,13 +18,13 @@ class Chair
             prices = new double[SIZE];
             legs = (rand() % 1) + 3;
             for (int i = 0; i < SIZE; i++)
-                prices[i] = 0;
+                prices[i] = (rand() % (MAX - MIN + 1) + MIN) / (double)100;
         }
-        Chair(int l) {
+        Chair(int l, double p[]) {
             prices = new double[SIZE];
             legs = l;
             for (int i = 0; i < SIZE; i++)
-                prices[i] = 0;
+                prices[i] = p[i];
         }
 
         // setters and getters
@@ -62,8 +62,8 @@ int main() {
     chairPtr->print();
 
     //creating dynamic chair object with constructor
-    Chair *livingChair = new Chair(3);
-    livingChair->setPrices(525.25, 434.34, 252.52);
+    double prices[3] = {525.25, 434.34, 252.52};
+    Chair *livingChair = new Chair(3, prices);
     livingChair->print();
     delete livingChair;
     livingChair = nullptr;
