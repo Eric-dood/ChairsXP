@@ -1,9 +1,11 @@
 //COMSC-210 | Lab 20 | Eric-Giulio Hedes
 #include <iostream>
 #include <iomanip>
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
-const int SIZE = 3, MIN = 99999, MAX = 100000;
+const int SIZE = 3, MIN = 10000, MAX = 99999;
 
 class Chair
 {
@@ -16,7 +18,7 @@ class Chair
         // constructors
         Chair() {
             prices = new double[SIZE];
-            legs = (rand() % 1) + 3;
+            legs = (rand() % 2) + 3;
             for (int i = 0; i < SIZE; i++)
                 prices[i] = (rand() % (MAX - MIN + 1) + MIN) / (double)100;
         }
@@ -52,10 +54,19 @@ class Chair
         }
 };
 
-int main() {
+//Start of main()
+int main()
+{
+    //Set up a random seed generator just in case
+    srand(time(0));
+    //Set the precision to show only two decimals
     cout << fixed << setprecision(2);
 
-    //creating pointer to first chair object
+    //Creating a blank chair pointer (automatically fills itself up)
+    Chair *blankPtr = new Chair;
+    blankPtr->print();
+
+    //Creating a chair object with legs and prices filled up
     Chair *chairPtr = new Chair;
     chairPtr->setLegs(4);
     chairPtr->setPrices(121.21, 232.32, 414.14);
